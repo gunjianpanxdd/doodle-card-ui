@@ -1,10 +1,11 @@
-# Visual Baseline Screenshot Index · Read Before Use
+# Visual Baseline Screenshot Index · Optional Reference
 
-> Style is visual. Numeric specs guarantee "correct"; screenshots guarantee "looks right".
-> **Before starting**, view one "overall impression" image; **during acceptance**, compare your output against the matching component baseline.
-> All captured from real shipped pages of the pm-os workbench (2026-11-18, final state after 14 iteration rounds).
+> **This file is not a mandatory workflow read.** The main flow treats `assets/doodle.css` (tokens + recipes) and `references/style-spec.md` (numeric specs + acceptance checklist) as the source of truth — the style is defined by exact values and written specs are sufficient to produce consistent styles.
+> Consult this index only when a visual "looks-right" judgment is genuinely needed: screenshot the rendered target page, then open the matching baseline below with an image-viewing tool (ViewImage, using the absolute image path — reading the path alone does not surface the image).
+> Note: screenshots are snapshots from 2026-11-18 and go stale when a token changes — `doodle.css` / `style-spec.md` win on any conflict. For a "live baseline", render `assets/doodle-page-template.html`, which stays in sync with the CSS.
+> All captured from real shipped pages of the pm-os workbench (final state after 14 iteration rounds).
 
-## Overall impression (view one before starting)
+## Overall impression (optional, view one as needed)
 
 | File | What to look at |
 |---|---|

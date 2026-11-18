@@ -1,6 +1,12 @@
 # doodle-card-ui · 手绘贴纸卡片风设计系统 / Hand-drawn Sticker Card Design System
 
-**中文** | [English](en/SKILL.md)
+**中文** | [English](en/README.md)
+
+> 效果预览 / Preview（截自 pm-os 工作台真实落地页）
+>
+> ![整体效果：标题卡 + focus 数字条 + 贴纸导航 + 内容卡](references/screenshots/overview-index-top.png)
+>
+> ![组件模板页：核心组件一页看全](references/screenshots/template-reference.png)
 
 一套经真实项目验证的 Web UI 风格系统（Agent Skill 格式）：白色圆角卡片 + 深墨线描边 + 右下硬投影（贴纸感）+ 荧光黄点缀 + 手绘涂鸦 SVG。
 
@@ -18,16 +24,18 @@ A battle-tested Web UI style system in Agent Skill format: white rounded cards +
 
 ## 快速开始 / Quick start
 
-1. **先看一张图** / **View one image first**: [`references/screenshots/overview-index-top.png`](references/screenshots/overview-index-top.png) —— 数字想象不出"手绘感" / numbers alone can't convey the hand-drawn feel
-2. 从零建页：拷 [`assets/doodle-page-template.html`](assets/doodle-page-template.html) + [`assets/doodle.css`](assets/doodle.css) 起步 / New page: start from the template + design-system CSS
+1. 读规则：读 [`assets/doodle.css`](assets/doodle.css)（token + 组件配方）+ [`references/style-spec.md`](references/style-spec.md)（规格 + 踩坑）——代码即真相，规格是精确数值 / Read the rules: `doodle.css` (tokens + recipes) + `style-spec.md` (specs + scars) — code is the source of truth
+2. 从零建页：拷 [`assets/doodle-page-template.html`](assets/doodle-page-template.html) 起步 / New page: start from the template
 3. 存量改造：把 `doodle.css` 追加到页面样式**末尾**，按组件层分批覆盖 / Existing page: append `doodle.css` at the END of styles, override layer by layer
-4. 验收：对照基准截图 + 5 条自检问法 / Accept: compare against baselines + 5 self-check questions
+4. 验收：computed style 断言（border / box-shadow / 背景）为主；需要目视确认时可选看[基准截图](references/screenshots.md) / Accept: computed-style assertions first; optional visual check against [baseline screenshots](references/screenshots.md)
 
 ## 目录结构 / Structure
 
 ```
-├── SKILL.md                  # 中文主文档（工作流 + 铁律 + 踩坑速查）
-├── en/SKILL.md               # English main doc (full mirror)
+├── SKILL.md                  # 唯一技能入口（中文主文档：工作流 + 铁律 + 踩坑速查）
+├── en/
+│   ├── README.md             # 英文门面页（含预览图）/ English storefront (with preview images)
+│   └── SKILL_EN.md           # English mirror (reference only, no frontmatter — not a separate skill)
 ├── assets/
 │   ├── doodle.css            # 设计系统 CSS（token + 组件配方）/ design-system CSS (tokens + recipes)
 │   ├── doodle-page-template.html  # 组件模板页（起点样板）/ component template page (starting boilerplate)
@@ -48,9 +56,9 @@ A battle-tested Web UI style system in Agent Skill format: white rounded cards +
 
 ## 使用方式 / How to use
 
-作为 WorkBuddy/Claude 类 Agent Skill 安装到 `~/.workbuddy/skills/doodle-card-ui/`（中文版生效）或按 `en/SKILL.md` 的同样结构放英文版；也可以不当 skill 用——直接把 `assets/` 当设计系统拷进任何 Web 项目。
+作为 WorkBuddy/Claude 类 Agent Skill 安装到 `~/.workbuddy/skills/doodle-card-ui/`，根目录 `SKILL.md` 是唯一入口；英文版 `en/SKILL_EN.md` 为参考镜像，无 frontmatter、不会被注册为独立技能。也可以不当 skill 用——直接把 `assets/` 当设计系统拷进任何 Web 项目。
 
-Install as an agent skill under `~/.workbuddy/skills/doodle-card-ui/` (Chinese), or mirror per `en/SKILL.md` for English; or skip the skill form entirely — copy `assets/` into any web project as a standalone design system.
+Install as an agent skill under `~/.workbuddy/skills/doodle-card-ui/`; the root `SKILL.md` is the single entry point. The English `en/SKILL_EN.md` is a reference mirror with no frontmatter and is not registered as a separate skill. Or skip the skill form entirely — copy `assets/` into any web project as a standalone design system.
 
 ## License / 许可
 

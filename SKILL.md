@@ -17,18 +17,18 @@ agent_created: true
 | `assets/doodle.css` | **可整体拷贝的设计系统 CSS**（token + 全组件配方），作为覆盖块追加进目标页面 |
 | `assets/doodle-page-template.html` | **组件模板页**（与 doodle.css 同目录即可运行）：全部核心组件的起点样板，新页面从它改起，不再从零拼 |
 | `assets/doodle-library.html` | 8 个涂鸦 SVG 件的成品库（浏览器打开目视挑选，源码直接拷） |
-| `references/screenshots.md` | **视觉基准截图索引**：开工前看 1 张整体图建立语感，验收时对照组件图自查（含 5 条自检问法） |
+| `references/screenshots.md` | 视觉基准截图索引（**可选**）：仅在需要目视确认"像不像"时查；含 5 条自检问法。主流程不依赖看图，见下方"视觉校验" |
 | `references/svg-prompt.md` | **涂鸦 SVG 生成 Prompt 模板**（生图模型版 + Agent 写内联 SVG 版 + 验收清单），需要新涂鸦而成品库里没有时用它 |
 | `references/style-spec.md` | 完整组件规格 + 实战踩坑清单（特异性陷阱、取整假阳性、覆盖顺序等），落地前必读 |
 
 ## 工作流
 
-### 1. 评估目标页面
-- **先看一张视觉基准图**（`references/screenshots.md` 首选 `overview-index-top.png`），建立风格语感——只有数字规格想象不出「手绘贴纸感」。
+### 1. 加载规则 + 评估目标页面
+- **先加载确定性的规则源，不要先找图**：读 `assets/doodle.css`（token + 组件配方）与 `references/style-spec.md`（数值规格 + 踩坑）。**代码与规格即真相**——风格由精确数值定义（墨线 `#1a1a1a`、硬投影 `2.5px 2.5px 0`、荧光黄 `#ffe28a`），文字规格足以据此写出一致样式，无需靠图片"建立语感"。
+- 从零新建页面：直接以 `assets/doodle-page-template.html` 为起点改（它本身是渲染好的活样板，比静态图更准、不会过时），不要从零拼结构。
 - 确认浅色主题（本系统为浅色设计；深色主题需另调 token，不要硬套）。
 - 盘点四类对象：①一级容器卡 ②按钮/输入件 ③tab/提示条/badge ④数据密集区（表格/日志/代码）。
 - 识别既有样式的组织方式：内联 `<style>`？shared CSS？组件库（antd 等）？——决定覆盖块写在哪。
-- 从零新建页面时：直接以 `assets/doodle-page-template.html` 为起点改，不要从零拼结构。
 
 ### 2. 集成 doodle.css
 - 把 `assets/doodle.css` 追加到页面样式**末尾**（后加载者胜），顶部加注释标记（如 `/* DOODLE ROUND <日期> */`）。
@@ -45,7 +45,10 @@ agent_created: true
 ### 4. 落地与验证
 - 每批只做一层（先一级容器 → 再按钮/输入件 → 再 tab/提示条 → 最后弹窗内部），每批独立验收。
 - 删旧组件前盘点独占功能（如状态条里的唯一按钮要先搬家）。
-- 验证：DOM 结构不变（id/函数签名不动）→ 样式 computed 断言（border/box-shadow/背景色）→ **截图与 `references/screenshots.md` 的基准图对照**（过那 5 条自检问法）→ 目视。**注意：1.6px 边框在 Chromium computed style 里显示 1px，是取整假阳性不是没生效。**
+- 主验证（确定性，必做）：DOM 结构不变（id/函数签名不动）→ **computed style 断言**（border / box-shadow / 背景色）→ 过 `references/style-spec.md` 验收清单。**注意：1.6px 边框在 Chromium computed style 里显示 1px，是取整假阳性不是没生效。**
+- 视觉校验（可选，仅当"像不像"需要目视确认时）：用浏览器渲染目标页并截图，再用看图工具打开 `references/screenshots/` 下对应基准图对照，过 `references/screenshots.md` 的 5 条自检问法。**截图是某时点快照，token 一改即过时——冲突时以 `doodle.css` / `style-spec.md` 为准。**
+
+> 环境提示：本仓库的看图工具为 ViewImage（接受图片绝对路径）；不要指望读取图片文件路径本身能看到图像内容。基准图绝对路径示例：`<skill 根目录>/references/screenshots/overview-index-top.png`。
 
 ## 实战踩坑（详见 references/style-spec.md 第四节）
 

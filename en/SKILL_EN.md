@@ -1,10 +1,6 @@
----
-name: doodle-card-ui
-description: Applies and distills a "doodle hand-drawn sticker card" Web UI design system (battle-tested in the pm-os workbench project). Use when the user wants to restyle or unify pages into a hand-drawn card style — ink outlines, hard offset shadows, fluorescent-yellow accents — or to review/patch an interface that already uses this style. Trigger words: hand-drawn card style, sticker style, doodle, sketch card, hard shadow, fluorescent yellow, "cardify XX".
-agent_created: true
----
-
 # doodle-card-ui · Hand-drawn Sticker Card Design System
+
+> English mirror of the root `SKILL.md` (reference only). The single skill entry point is `SKILL.md` at the repository root; this file carries no frontmatter so it is not registered as a separate skill.
 
 ## Overview
 
@@ -17,7 +13,7 @@ A Web UI style system validated in a real project (pm-os AI PM workbench, 7 page
 | `assets/doodle.css` | **Copy-paste design system CSS** (tokens + full component recipes), appended to the target page as an override block |
 | `assets/doodle-page-template.html` | **Component template page** (runs alongside doodle.css): a starting boilerplate with all core components — build new pages from it, never from scratch |
 | `assets/doodle-library.html` | Library of 8 finished doodle SVG pieces (open in a browser to pick visually, copy the source directly) |
-| `references/screenshots.md` | **Visual baseline screenshot index**: view 1 overview image before starting; compare component shots during acceptance (includes 5 self-check questions) |
+| `references/screenshots.md` | Visual baseline screenshot index (**optional**): consult only when a visual "looks-right" check is needed; includes 5 self-check questions. The main flow is image-independent — see "Visual verification" below |
 | `references/svg-prompt.md` | **Doodle SVG generation prompt templates** (image-generation version + agent inline-SVG version + acceptance checklist); use when the library has no suitable piece |
 | `references/style-spec.md` | Full component specs + battle scars (specificity traps, rounding false positives, override order, etc.) — required reading before implementation |
 
@@ -25,12 +21,12 @@ Note: assets carry Chinese comments; all rules are fully mirrored in this Englis
 
 ## Workflow
 
-### 1. Evaluate the target page
-- **View one visual baseline screenshot first** (`references/screenshots.md`; start with `overview-index-top.png`) to calibrate the aesthetic — numbers alone cannot convey the "hand-drawn sticker feel".
+### 1. Load the rules + evaluate the target page
+- **Load the deterministic rule sources first — do not hunt for images first**: read `assets/doodle.css` (tokens + component recipes) and `references/style-spec.md` (numeric specs + battle scars). **Code and specs are the source of truth** — the style is defined by exact values (ink `#1a1a1a`, hard shadow `2.5px 2.5px 0`, fluorescent yellow `#ffe28a`); the written specs are sufficient to produce consistent styles without "calibrating" from pictures.
+- For brand-new pages: start from `assets/doodle-page-template.html` (a rendered live boilerplate — more accurate than a static image and never goes stale), never assemble structure from scratch.
 - Confirm a light theme (this system is designed for light backgrounds; dark themes need re-tuned tokens, do not force-fit).
 - Inventory four object classes: ① top-level container cards ② buttons/inputs ③ tabs/notices/badges ④ data-dense zones (tables/logs/code).
 - Identify how existing styles are organized: inline `<style>`? shared CSS? a component library (antd etc.)? — this decides where override blocks go.
-- For brand-new pages: start from `assets/doodle-page-template.html`, never assemble structure from scratch.
 
 ### 2. Integrate doodle.css
 - Append `assets/doodle.css` at the **end** of page styles (later loading wins), with a comment marker on top (e.g. `/* DOODLE ROUND <date> */`).
@@ -47,7 +43,10 @@ Note: assets carry Chinese comments; all rules are fully mirrored in this Englis
 ### 4. Land and verify
 - One layer per batch (top-level containers → buttons/inputs → tabs/notices → dialog internals), each batch accepted independently.
 - Before deleting an old component, inventory its exclusive functions (e.g. the only button inside a status bar must be relocated first).
-- Verify: DOM unchanged (ids/function signatures untouched) → computed-style assertions (border/box-shadow/background) → **screenshot compared against the baselines in `references/screenshots.md`** (run the 5 self-check questions) → eyeball. **Note: 1.6px borders show as `1px` in Chromium computed style — a rounding false positive, not a failure.**
+- Primary verification (deterministic, mandatory): DOM unchanged (ids/function signatures untouched) → **computed-style assertions** (border / box-shadow / background) → run the acceptance checklist in `references/style-spec.md`. **Note: 1.6px borders show as `1px` in Chromium computed style — a rounding false positive, not a failure.**
+- Visual verification (optional — only when a "looks-right" judgment genuinely needs eyeballing): render the target page in a browser and screenshot it, then open the matching baseline under `references/screenshots/` with an image-viewing tool and run the 5 self-check questions in `references/screenshots.md`. **Screenshots are point-in-time snapshots and go stale the moment a token changes — `doodle.css` / `style-spec.md` win on any conflict.**
+
+> Environment note: this repo's image-viewing tool is ViewImage (takes an absolute image path); reading an image file path alone does not surface the image. Baseline example absolute path: `<skill root>/references/screenshots/overview-index-top.png`.
 
 ## Battle scars (details in references/style-spec.md §4)
 
