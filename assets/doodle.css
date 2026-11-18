@@ -1,0 +1,106 @@
+/* ============================================================
+   doodle-card-ui · Hand-drawn Sticker Card Design System v1.0 (2026-11-18)
+   手绘贴纸卡片风设计系统 · 来源：pm-os 工作台 14 轮实战沉淀
+   Zero-dependency, light theme, append-as-override.
+   零依赖、浅色主题、可整体追加。
+   Usage: paste the whole block at the END of the target page's styles
+   (later loading wins); tune the --dc-* tokens as needed.
+   用法：整段拷到目标页面样式末尾（后加载者胜），按需调 --dc-* token。
+   Iron rules (see SKILL.md): fluorescent yellow = 3 meanings only /
+   stars ≤2 per screen / thick ink on top-level containers only.
+   铁律见 SKILL.md：荧光黄三语义 / 星 ≤2 每屏 / 粗墨线只上一级容器。
+   ============================================================ */
+
+:root{
+  --dc-ink:#1a1a1a;          /* 墨线 */
+  --dc-ink-soft:rgba(26,26,26,.75);
+  --dc-yellow:#ffe28a;       /* 荧光黄：仅 选中态/待办/人工闸门 三种语义 */
+  --dc-star:#f5e042;         /* 星形填充黄 */
+  --dc-cream:#f9f0d8;        /* hover 预览奶油底 */
+  --dc-paper:#fff;           /* 卡片底 */
+  --dc-gray:#e3e1da;         /* 涂鸦内的灰阶件 */
+  --dc-brand:#2f52a8;        /* 品牌主色（按项目改） */
+  --dc-brand-soft:#eef2ff;
+  --dc-radius:12px;
+}
+
+/* ---- 一级容器卡 ---- */
+.dc .card,.dc-card{
+  background:var(--dc-paper);border:2px solid var(--dc-ink);border-radius:var(--dc-radius);
+  box-shadow:2.5px 2.5px 0 var(--dc-ink);padding:16px 18px}
+/* 标题卡（页头主标题）：左下弧线点缀 */
+.dc-title{
+  background:var(--dc-paper);border:2px solid var(--dc-ink);border-radius:14px;
+  box-shadow:3px 3px 0 var(--dc-ink);padding:14px 20px;position:relative;
+  font-weight:700;letter-spacing:.04em}
+.dc-title::after{content:'';position:absolute;left:26px;bottom:-8px;width:52px;height:9px;
+  border:2px solid var(--dc-ink);border-top:0;border-radius:0 0 20px 20px/0 0 10px 10px}
+
+/* ---- 按钮三层贴纸化：hover 翘起 / active 按下 ---- */
+.dc .btn,.dc-btn{
+  border:1.6px solid var(--dc-ink);border-radius:8px;background:var(--dc-paper);color:#1b2233;
+  box-shadow:2px 2px 0 var(--dc-ink-soft);cursor:pointer;font-family:inherit;
+  transition:transform .08s,box-shadow .08s,background .08s}
+.dc .btn:hover,.dc-btn:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--dc-ink-soft);background:var(--dc-cream);color:#1b2233}
+.dc .btn:active,.dc-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--dc-ink-soft)}
+.dc .btn.primary,.dc-btn.primary{background:var(--dc-brand);border-color:var(--dc-ink);color:#fff}
+.dc .btn.primary:hover,.dc-btn.primary:hover{background:var(--dc-brand);color:#fff}
+.dc .btn:disabled{opacity:.45;transform:none;cursor:not-allowed}
+
+/* ---- 输入件 ---- */
+.dc input,.dc textarea,.dc select{
+  border:1.6px solid var(--dc-ink);border-radius:8px;background:#fff}
+.dc input:focus,.dc textarea:focus,.dc select:focus{outline:none;box-shadow:2px 2px 0 rgba(26,26,26,.14)}
+
+/* ---- tab 三形态 ---- */
+/* 主导航贴纸组（可交替微倾斜） */
+.dc .nav-tabs button,.dc-navtab{
+  border:1.6px solid var(--dc-ink);border-radius:11px;background:var(--dc-paper);color:#1b2233;
+  box-shadow:2.5px 2.5px 0 var(--dc-ink);padding:11px 22px;cursor:pointer;font-family:inherit;
+  transition:transform .08s,box-shadow .08s,background .08s}
+.dc .nav-tabs button:nth-of-type(odd){transform:rotate(-.45deg)}
+.dc .nav-tabs button:nth-of-type(even){transform:rotate(.45deg)}
+.dc .nav-tabs button:hover{background:var(--dc-cream);transform:translate(-1px,-1px) rotate(0)}
+.dc .nav-tabs button.on,.dc-navtab.on{background:var(--dc-yellow);color:#1b2233;font-weight:600;
+  transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--dc-ink)}
+/* 次级 tab：小贴纸 */
+.dc .subtabs button{border:1.6px solid var(--dc-ink);border-radius:9px;background:var(--dc-paper);
+  color:#1b2233;box-shadow:1.5px 1.5px 0 var(--dc-ink-soft);padding:6px 16px;cursor:pointer;
+  transition:transform .08s,box-shadow .08s,background .08s}
+.dc .subtabs button:hover{transform:translate(-1px,-1px);background:var(--dc-cream)}
+.dc .subtabs button.on{background:var(--dc-yellow);font-weight:600}
+/* 分段控件 seg（连体） */
+.dc .seg{display:inline-flex;background:#fff;border:1.6px solid var(--dc-ink);border-radius:9px;
+  overflow:hidden;box-shadow:1.5px 1.5px 0 var(--dc-ink-soft)}
+.dc .seg button{border:0;border-radius:0;padding:5px 12px;background:transparent;cursor:pointer;color:var(--dc-ink)}
+.dc .seg button.on{background:var(--dc-yellow);font-weight:600}
+.dc .seg button+button{border-left:1px solid var(--dc-ink)}
+
+/* ---- 提示条：墨线 + 语义底色保留 ---- */
+.dc .notice{border:1.6px solid var(--dc-ink);border-radius:10px;box-shadow:2px 2px 0 var(--dc-ink-soft)}
+.dc .notice.info{background:var(--dc-brand-soft)}
+.dc .notice.bad{background:#fdecef}
+
+/* ---- badge / chip ---- */
+.dc .badge,.dc-chip{border:1.6px solid var(--dc-ink);border-radius:999px;background:var(--dc-paper);
+  box-shadow:1.5px 1.5px 0 var(--dc-ink-soft);padding:3px 10px;font-weight:600}
+/* 序号章（章节标题里的 1/2/3） */
+.dc .stepn{display:inline-flex;width:20px;height:20px;border-radius:6px;border:1.6px solid var(--dc-ink);
+  background:var(--dc-yellow);align-items:center;justify-content:center;font-weight:700;
+  font-size:11px;box-shadow:1.5px 1.5px 0 var(--dc-ink-soft)}
+
+/* ---- 弹窗：大号墨线卡 ---- */
+.dc .modal,.dc-sheet{border:2.5px solid var(--dc-ink);border-radius:18px;
+  box-shadow:5px 5px 0 var(--dc-ink),0 24px 60px rgba(18,24,46,.22)}
+
+/* ---- 量表条（统计卡内的分段进度条） ---- */
+.dc .meter{display:flex;height:7px;border-radius:4px;overflow:hidden;background:#f2f4fa;
+  border:1.5px solid var(--dc-ink)}
+.dc .meter i{display:block;height:100%}
+
+/* ---- 空态：涂鸦 + 一句话 + 动作按钮 ---- */
+.dc .empty-hero{text-align:center;padding:28px 18px;color:#9aa5c5;font-size:12.5px;line-height:1.7}
+.dc .empty-hero svg{display:block;margin:0 auto 10px}
+
+/* ---- 四角星（待办标记/装饰，每屏 ≤2） ---- */
+.dc-star{display:inline-block;vertical-align:-2px}

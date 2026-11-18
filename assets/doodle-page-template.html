@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>doodle-card-ui 组件模板 · 视觉基准再生源</title>
+<!-- 用法：本文件与 doodle.css 放同一目录即直接可开。
+     作为新页面的起点样板：拷走 <body> 结构 + 末尾 doodle.css，
+     替换文案与 --dc-brand。改过组件后重跑截图可再生成基准图。 -->
+<link rel="stylesheet" href="doodle.css">
+<style>
+  /* 页面自己的基底样式（doodle.css 只做覆盖层，不管布局） */
+  :root{--dc-brand:#2f52a8}
+  *{box-sizing:border-box}
+  body{margin:0;background:#f5f6f8;color:#1b2233;
+    font:13.5px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 28px 60px}
+  .cols{display:grid;grid-template-columns:1fr 300px;gap:14px}
+  @media(max-width:900px){.cols{grid-template-columns:1fr}}
+  .row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+  .item{border:1px solid #eef1f6;border-radius:8px;padding:11px 13px;margin-bottom:9px;background:#fff}
+  .item .t{font-weight:600;font-size:14px}
+  .item .s{font-size:12.3px;color:#5c6579;margin-top:4px;line-height:1.65}
+  .pill{font-size:11px;padding:2px 8px;border-radius:5px;background:#f0f2f6;color:var(--dc-ink-soft,#5c6579);font-weight:500}
+  .pill.ok{background:#e7f5ee;color:#0f7d5c}.pill.mid{background:#fff3e0;color:#a86500}.pill.hi{background:#fdeaee;color:#bd2b3f}
+  /* focus 数字条：数据区素净，外壳墨线 */
+  .focus{display:flex;flex-wrap:wrap;background:#fff;position:relative;margin-bottom:14px}
+  .focus .fitem{padding:10px 22px;border-right:1px solid #eef1f6}
+  .focus .fn{font-size:22px;font-weight:700;line-height:1.1}
+  .focus .fl{font-size:11.5px;color:#5c6579}
+</style>
+</head>
+<body class="dc">
+<div class="wrap">
+
+  <!-- ① 标题卡：每页一个，弧线自动带出 -->
+  <h1 class="dc-title" style="margin:0 0 16px">页面标题
+    <span style="font-size:12.5px;font-weight:600;color:#5c6579;margin-left:10px">一句副标题说清这页干什么</span>
+  </h1>
+
+  <!-- ② focus 数字条（可选）：数据骨架，外壳走 focus 墨线覆盖 -->
+  <div class="focus dc-card" style="padding:0">
+    <div class="fitem"><div class="fn">12</div><div class="fl">条信号在池</div></div>
+    <div class="fitem"><div class="fn">3</div><div class="fl">份档案</div></div>
+    <div class="fitem"><div class="fn">87%</div><div class="fl">通过率</div></div>
+  </div>
+
+  <!-- ③ 主导航贴纸组：选中=荧光黄（语义①），可加交替倾斜 -->
+  <nav class="row" style="margin-bottom:16px">
+    <button class="dc-navtab on">看什么</button>
+    <button class="dc-navtab">拆什么</button>
+    <button class="dc-navtab">做什么</button>
+    <button class="dc-navtab">验什么</button>
+  </nav>
+
+  <div class="cols">
+    <div>
+      <!-- ④ 内容卡：粗墨线只上一级容器 -->
+      <div class="dc-card" style="margin-bottom:14px">
+        <h2 style="font-size:15px;margin:0 0 12px">内容卡 <small style="font-weight:400;color:#9aa5c5">卡内数据区素净</small></h2>
+        <div class="item">
+          <div class="t">一条重点条目 <span class="pill ok">信号</span></div>
+          <div class="s">摘要把这条说清楚。卡内条目用 1px 灰边、不涂鸦——风格的对比度来自「粗的粗、素的素」。</div>
+        </div>
+        <div class="item" style="background:#fffdf2;border-color:var(--dc-ink);border-left-width:3px">
+          <div class="t"><span class="pill" style="background:var(--dc-yellow);border:1.5px solid var(--dc-ink);border-radius:6px">先看这条</span> 重点条目（荧光黄贴纸 = 语义② 重点/待办）</div>
+        </div>
+        <div class="item">
+          <div class="t">普通条目 <span class="pill mid">待处理</span></div>
+        </div>
+      </div>
+
+      <!-- ⑤ 按钮三态 -->
+      <div class="dc-card" style="margin-bottom:14px">
+        <h2 style="font-size:15px;margin:0 0 12px">按钮</h2>
+        <div class="row">
+          <button class="dc-btn primary">主操作</button>
+          <button class="dc-btn">次操作</button>
+          <button class="dc-btn" style="color:#bd2b3f">危险</button>
+          <button class="dc-btn" disabled>禁用</button>
+          <span class="dc-chip">chip 徽章</span>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <input placeholder="输入件：1.6px 墨线" style="border:1.6px solid var(--dc-ink);border-radius:8px;padding:8px 11px;font:inherit;flex:1">
+        </div>
+      </div>
+
+      <!-- ⑥ 空态公式：涂鸦 + 一句话 + 一个动作 -->
+      <div class="dc-card" style="text-align:center;padding:34px 20px">
+        <svg viewBox="-12 -12 24 24" width="44" height="44" aria-hidden="true"><path d="M0 -9 Q1.6 -1.6 9 0 Q1.6 1.6 0 9 Q-1.6 1.6 -9 0 Q-1.6 -1.6 0 -9 Z" fill="#f5e042" stroke="#1a1a1a" stroke-width="2" stroke-linejoin="round"/></svg>
+        <div style="color:#9aa5c5;font-size:12.5px;margin:8px 0 12px">还没有东西，一句话说清空的是什么</div>
+        <button class="dc-btn primary">去做第一件事</button>
+      </div>
+    </div>
+
+    <div>
+      <!-- ⑦ 侧栏：提示条语义族 -->
+      <div class="dc-card" style="margin-bottom:14px">
+        <h2 style="font-size:15px;margin:0 0 12px">提示条</h2>
+        <div class="dc-note" style="background:#fff5e2;color:#7a5200;border:1.6px solid var(--dc-ink);border-radius:10px;box-shadow:2px 2px 0 rgba(26,26,26,.6);padding:8px 12px;font-size:12.3px;margin-bottom:8px">warn 语义：底色保留</div>
+        <div class="dc-note" style="background:#e9f2fb;color:#1c5488;border:1.6px solid var(--dc-ink);border-radius:10px;box-shadow:2px 2px 0 rgba(26,26,26,.6);padding:8px 12px;font-size:12.3px;margin-bottom:8px">info 语义：底色保留</div>
+        <div class="dc-note" style="background:#fdeaee;color:#bd2b3f;border:1.6px solid var(--dc-ink);border-radius:10px;box-shadow:2px 2px 0 rgba(26,26,26,.6);padding:8px 12px;font-size:12.3px">bad 语义：底色保留</div>
+      </div>
+
+      <div class="dc-card">
+        <h2 style="font-size:15px;margin:0 0 12px">四角星使用</h2>
+        <div style="font-size:12.3px;color:#5c6579;line-height:1.7">
+          每屏 ≤ 2 颗；只点缀标题卡与空态；本页已用 1 颗（空态），这个位置不能再放。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

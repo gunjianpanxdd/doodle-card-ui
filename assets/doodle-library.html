@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>doodle-card-ui · 涂鸦 SVG 库</title>
+<style>
+body{margin:0;background:#f7f8fc;color:#1b2233;font:14px/1.6 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;padding:26px 22px 70px}
+h1{font-size:19px} .sub{color:#5d678a;font-size:12.5px;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.item{background:#fff;border:2px solid #1a1a1a;border-radius:12px;box-shadow:2.5px 2.5px 0 #1a1a1a;padding:14px}
+.item h3{font-size:13px;margin:0 0 8px}
+.item .demo{display:flex;align-items:center;justify-content:center;min-height:96px;background:#fbfcff;border-radius:8px}
+.item pre{font:10.5px/1.5 ui-monospace,Consolas,monospace;background:#f2f4fa;border-radius:6px;padding:8px;margin:8px 0 0;overflow:auto;white-space:pre-wrap;word-break:break-all;max-height:120px}
+.rule{font-size:11.5px;color:#9aa5c5;margin-top:6px}
+</style>
+</head>
+<body>
+<h1>doodle 涂鸦 SVG 库</h1>
+<p class="sub">风格 DNA：墨线 #1a1a1a / 荧光黄 #ffe28a（星形填充 #f5e042）/ 奶油 #f9f0d8 / 灰 #e3e1da。外轮廓 3px、内部 2px、圆头。每幅必配点缀（四角星 + 短弧线）。允许出现的位置：空态、决策卡、装饰位、插画位——数据密集区禁止。</p>
+<div class="grid">
+
+<div class="item"><h3>1 · 四角星（小，待办标记）</h3><div class="demo">
+<svg width="15" height="15" viewBox="0 0 20 20"><path d="M10 1 Q11.4 8.6 19 10 Q11.4 11.4 10 19 Q8.6 11.4 1 10 Q8.6 8.6 10 1 Z" fill="#ffe28a" stroke="#1a1a1a" stroke-width="1.6" stroke-linejoin="round"/></svg>
+</div><pre>&lt;svg width="15" height="15" viewBox="0 0 20 20"&gt;&lt;path d="M10 1 Q11.4 8.6 19 10 Q11.4 11.4 10 19 Q8.6 11.4 1 10 Q8.6 8.6 10 1 Z" fill="#ffe28a" stroke="#1a1a1a" stroke-width="1.6" stroke-linejoin="round"/&gt;&lt;/svg&gt;</pre><div class="rule">语义②待办/计数标记 · 每屏 ≤2</div></div>
+
+<div class="item"><h3>2 · 四角星（大，空态/装饰）</h3><div class="demo">
+<svg width="34" height="34" viewBox="0 0 34 34"><path d="M17 3 L20 14 L31 17 L20 20 L17 31 L14 20 L3 17 L14 14 Z" fill="#f5e042" stroke="#1b2440" stroke-width="2" stroke-linejoin="round"/></svg>
+</div><pre>&lt;svg width="34" height="34" viewBox="0 0 34 34"&gt;&lt;path d="M17 3 L20 14 L31 17 L20 20 L17 31 L14 20 L3 17 L14 14 Z" fill="#f5e042" stroke="#1b2440" stroke-width="2" stroke-linejoin="round"/&gt;&lt;/svg&gt;</pre><div class="rule">空态主角或卡片角星（可旋转 14°）</div></div>
+
+<div class="item"><h3>3 · 层叠纸（队列/列表空态）</h3><div class="demo">
+<svg width="110" height="82" viewBox="0 0 120 90"><g transform="rotate(-3 60 45)"><rect x="32" y="14" width="58" height="15" rx="5" fill="#f9f0d8" stroke="#1a1a1a" stroke-width="2.2"/><rect x="26" y="35" width="58" height="15" rx="5" fill="#fff" stroke="#1a1a1a" stroke-width="2.2"/><rect x="34" y="56" width="58" height="15" rx="5" fill="#fff" stroke="#1a1a1a" stroke-width="2.2"/><rect x="41" y="60" width="34" height="7" rx="3.5" fill="#ffe28a" stroke="#1a1a1a" stroke-width="1.8"/></g><path d="M100 26 c7 -5 15 -5 20 -1" fill="none" stroke="#1a1a1a" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -9 Q1.6 -1.6 9 0 Q1.6 1.6 0 9 Q-1.6 1.6 -9 0 Q-1.6 -1.6 0 -9 Z" transform="translate(102,70) scale(0.7)" fill="#ffe28a" stroke="#1a1a1a" stroke-width="2" stroke-linejoin="round"/></svg>
+</div><pre>见 doodle-library.html 源码第 3 块（g rotate(-3) + 三层纸条 + 黄标签 + 弧线星点缀）</pre><div class="rule">配一句话 + 动作按钮</div></div>
+
+<div class="item"><h3>4 · 开箱（产物/原型空态）</h3><div class="demo">
+<svg width="110" height="82" viewBox="0 0 120 90"><g transform="rotate(-3 60 48)"><path d="M36 42 l-13 -9" fill="none" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round"/><path d="M84 42 l13 -9" fill="none" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round"/><rect x="34" y="40" width="52" height="32" rx="5" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><rect x="52" y="47" width="16" height="9" rx="3.5" fill="#ffe28a" stroke="#1a1a1a" stroke-width="1.8"/></g><path d="M14 22 c6 -7 14 -9 22 -8" fill="none" stroke="#1a1a1a" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -9 Q1.6 -1.6 9 0 Q1.6 1.6 0 9 Q-1.6 1.6 -9 0 Q-1.6 -1.6 0 -9 Z" transform="translate(102,64) scale(0.7)" fill="#ffe28a" stroke="#1a1a1a" stroke-width="2" stroke-linejoin="round"/></svg>
+</div><pre>见源码第 4 块（开盖箱体 + 黄色小标签）</pre><div class="rule">"还没有产物"类空态</div></div>
+
+<div class="item"><h3>5 · 天平（决策卡）</h3><div class="demo">
+<svg width="96" height="84" viewBox="0 0 110 96"><g transform="rotate(-4 55 50)"><circle cx="55" cy="16" r="5" fill="#ffe28a" stroke="#1a1a1a" stroke-width="2"/><path d="M55 21 v52" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/><path d="M40 76 h30" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/><path d="M20 28 h70" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/><path d="M20 28 l-8 21 h16 z" fill="#f9f0d8" stroke="#1a1a1a" stroke-width="2.2" stroke-linejoin="round"/><path d="M90 28 l-8 21 h16 z" fill="#fff" stroke="#1a1a1a" stroke-width="2.2" stroke-linejoin="round"/></g><path d="M14 88 c8 3 17 2 24 -2" fill="none" stroke="#1a1a1a" stroke-width="2.2" stroke-linecap="round"/><path d="M0 -9 Q1.6 -1.6 9 0 Q1.6 1.6 0 9 Q-1.6 1.6 -9 0 Q-1.6 -1.6 0 -9 Z" transform="translate(98,12) scale(0.8)" fill="#ffe28a" stroke="#1a1a1a" stroke-width="2" stroke-linejoin="round"/></svg>
+</div><pre>见源码第 5 块（黄顶圆 + 横梁 + 双托盘三角）</pre><div class="rule">决策/判断卡 float-right；&lt;860px 隐藏</div></div>
+
+<div class="item"><h3>6 · 回旋箭头（推翻/重做卡）</h3><div class="demo">
+<svg width="62" height="54" viewBox="0 0 90 78"><g transform="rotate(-6 45 40)"><path d="M20 54 C22 34 40 22 56 26 C72 30 74 46 60 52 C52 55 42 53 38 45" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/><path d="M38 45 l-10 -3 M38 45 l2 10" fill="none" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round"/></g><path d="M0 -9 Q1.6 -1.6 9 0 Q1.6 1.6 0 9 Q-1.6 1.6 -9 0 Q-1.6 -1.6 0 -9 Z" transform="translate(78,16) scale(0.6)" fill="#ffe28a" stroke="#1a1a1a" stroke-width="2" stroke-linejoin="round"/><path d="M10 70 c6 2 12 2 18 -1" fill="none" stroke="#1a1a1a" stroke-width="2.2" stroke-linecap="round"/></svg>
+</div><pre>见源码第 6 块（C 曲线 + 箭头头部 + 星）</pre><div class="rule">小尺寸卡标题右侧</div></div>
+
+<div class="item"><h3>7 · 放大镜档案（拆解/检索空态）</h3><div class="demo">
+<svg width="110" height="82" viewBox="0 0 110 84"><g transform="rotate(-3 55 44)"><rect x="18" y="14" width="52" height="52" rx="6" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><rect x="26" y="24" width="36" height="6" rx="3" fill="#e3e1da"/><rect x="26" y="36" width="30" height="6" rx="3" fill="#e3e1da"/><rect x="26" y="48" width="24" height="6" rx="3" fill="#ffe28a" stroke="#1a1a1a" stroke-width="1.8"/><circle cx="72" cy="52" r="14" fill="#f9f0d8" stroke="#1a1a1a" stroke-width="3"/><path d="M82 62 l13 13" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/></g><path d="M0 -9 Q1.6 -1.6 9 0 Q1.6 1.6 0 9 Q-1.6 1.6 -9 0 Q-1.6 -1.6 0 -9 Z" transform="translate(99,18) scale(0.7)" fill="#ffe28a" stroke="#1a1a1a" stroke-width="2" stroke-linejoin="round"/><path d="M8 72 c6 3 14 3 20 -1" fill="none" stroke="#1a1a1a" stroke-width="2.2" stroke-linecap="round"/></svg>
+</div><pre>见源码第 7 块（档案纸 + 灰文本条 + 黄高亮条 + 放大镜）</pre><div class="rule">检索/档案类空态</div></div>
+
+<div class="item"><h3>8 · 鱼钩（线索/引导点缀）</h3><div class="demo">
+<svg width="20" height="20" viewBox="0 0 24 24" style="vertical-align:-4px"><circle cx="7" cy="4" r="2" fill="#ffe28a" stroke="#1a1a1a" stroke-width="1.6"/><path d="M7 6 v6 a5.5 5.5 0 0 0 11 0 v-1.5" fill="none" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round"/><path d="M18 10.5 l-3 -2 M18 10.5 l2.5 2" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/></svg>
+</div><pre>见源码第 8 块（黄饵圆 + 钩线倒钩）</pre><div class="rule">20px 内联点缀（中级浓度）· 竖排文字卡标题前</div></div>
+
+</div>
+</body>
+</html>
